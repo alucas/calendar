@@ -1,0 +1,11 @@
+{
+  "name": "agenda",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Agenda personnel : PWA installable, hors-ligne, données stockées en local.",
+  "scripts": {
+    "start": "node tools/serve.mjs",
+    "icons": "node tools/make-icons.mjs"
+  }
+}
