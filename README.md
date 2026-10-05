@@ -14,12 +14,14 @@ sw.js                   service worker : cache des fichiers pour le mode hors-li
 icons/                  icônes PNG (192, 512, maskable)
 tools/serve.mjs         serveur local de test
 tools/make-icons.mjs    générateur d'icônes
+tests/                  tests de non-régression
 ```
 
 ## Tester en local
 
 ```bash
 npm start        # http://localhost:3000
+npm test         # tests de non-régression (22 vérifications)
 ```
 
 > Le mode hors-ligne et l'installation ne fonctionnent que sur **localhost** ou en **HTTPS**.
@@ -36,3 +38,16 @@ envoyée et rien n'est à maintenir.
 - **Android (Chrome)** : ouvrir l'URL → menu ⋮ → « Installer l'application »,
   ou utiliser le bouton affiché dans la page.
 - **iPhone (Safari)** : ouvrir l'URL → Partager → « Sur l'écran d'accueil ».
+- **Firefox** : n'implémente pas `beforeinstallprompt` et ne sait pas installer de
+  vraie PWA. La page affiche alors des instructions de repli ; pour une
+  installation réelle, utiliser Chrome. Le mode hors-ligne fonctionne malgré tout.
+
+## Tests
+
+`npm test` exécute `app.js` dans un DOM simulé et vérifie :
+
+- la cohérence des identifiants entre `index.html` et `app.js` ;
+- le comportement d'installation sur Firefox Android, iPhone, Chrome (avec et sans
+  invitation), Firefox desktop, et une fois installé ;
+- la validité du manifeste (nom, `display`, icônes 192/512/maskable, URLs relatives) ;
+- la présence du gestionnaire `fetch` et du pré-cache dans le service worker.

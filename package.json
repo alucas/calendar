@@ -6,6 +6,7 @@
   "description": "Agenda personnel : PWA installable, hors-ligne, données stockées en local.",
   "scripts": {
     "start": "node tools/serve.mjs",
+    "test": "node tests/install-fallback.test.mjs",
     "icons": "node tools/make-icons.mjs"
   }
 }
